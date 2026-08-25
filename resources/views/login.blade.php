@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+  :root{
+    --topbar: #2c3947;
+    --page-bg: #eef0f2;
+    --card-border: #e2e5e9;
+    --label-color: #4a5568;
+    --accent: #3f7edb;
+    --placeholder: #a9b1bb;
+  }
+
+  * { box-sizing: border-box; }
+
+  body{
+    background: var(--page-bg);
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  /* Top bar - matches dashboard theme */
+  .topbar{
+    background: var(--topbar);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+  }
+  .topbar .brand{
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: .5px;
+    font-size: 1.05rem;
+  }
+  .topbar .brand i{ margin-right: 10px; color: var(--accent); }
+
+  /* Center login card vertically */
+  .login-outer{
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+
+  .card-wrap{
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .login-card{
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    padding: 36px 32px 32px 32px;
+  }
+
+  .login-header{
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .login-header .icon-circle{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #eaf1fc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px auto;
+  }
+  .login-header .icon-circle i{
+    color: var(--accent);
+    font-size: 1.4rem;
+  }
+  .login-header h4{
+    color: #2c3947;
+    font-weight: 700;
+    letter-spacing: .5px;
+    margin-bottom: 2px;
+  }
+  .login-header p{
+    color: var(--placeholder);
+    font-size: .85rem;
+    margin-bottom: 0;
+  }
+
+  .section-divider{
+    border: none;
+    border-top: 1px solid var(--card-border);
+    margin: 22px 0 26px 0;
+  }
+
+  .form-label{
+    color: var(--label-color);
+    font-weight: 600;
+    font-size: .9rem;
+    margin-bottom: 6px;
+  }
+
+  .form-control{
+    border: none;
+    border-bottom: 1px solid #d7dbe0;
+    border-radius: 0;
+    padding: 8px 2px;
+    font-size: .95rem;
+    background: transparent;
+  }
+  .form-control::placeholder{ color: var(--placeholder); }
+  .form-control:focus{
+    box-shadow: none;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .password-wrap{ position: relative; }
+  .password-wrap i{
+    position: absolute;
+    right: 4px;
+    top: 10px;
+    color: var(--placeholder);
+    cursor: pointer;
+  }
+
+  .field-row{ margin-bottom: 22px; }
+
+  .form-check-label{
+    color: var(--label-color);
+    font-size: .85rem;
+  }
+
+  .forgot-link{
+    font-size: .85rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .forgot-link:hover{ text-decoration: underline; }
+
+  .btn-login{
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: .5px;
+    padding: 10px 0;
+    border-radius: 4px;
+    border: none;
+    width: 100%;
+  }
+  .btn-login:hover{
+    background: #326bc0;
+    color: #fff;
+  }
+
+  .register-link{
+    text-align: center;
+    font-size: .9rem;
+    color: var(--label-color);
+    margin-top: 22px;
+  }
+  .register-link a{
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .register-link a:hover{ text-decoration: underline; }
+</style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <span class="brand"><i class="fa-solid fa-layer-group"></i>BranchMS</span>
+  </div>
+
+  <div class="login-outer">
+    <div class="card-wrap">
+      <div class="login-card">
+
+        <div class="login-header">
+          <div class="icon-circle">
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <h4>BRANCH LOGIN</h4>
+          <p>Enter your credentials to access your account</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <form id="loginForm" novalidate>
+
+          <div class="field-row">
+            <label class="form-label" for="branchId">Branch Name</label>
+            <input type="text" class="form-control" id="branchId" name="branchId" placeholder="Enter branch Name" required>
+          </div>
+
+          <div class="field-row">
+            <label class="form-label" for="password">Password</label>
+            <div class="password-wrap">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+              <i class="fa-regular fa-eye" id="togglePassword"></i>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="rememberMe">
+              <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-login">LOGIN</button>
+
+          <div class="register-link">
+            Don't have an account? <a href="register.html">Register here</a>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Toggle password visibility
+  const toggle = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('password');
+  toggle.addEventListener('click', () => {
+    const isPassword = passwordInput.type === 'password';
+    passwordInput.type = isPassword ? 'text' : 'password';
+    toggle.classList.toggle('fa-eye');
+    toggle.classList.toggle('fa-eye-slash');
+  });
+
+  // Basic submit handling (replace with real backend call)
+  document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const data = {
+      id: document.getElementById('branchId').value.trim(),
+      password: passwordInput.value,
+      remember: document.getElementById('rememberMe').checked
+    };
+    if(!data.id || !data.password){
+      alert('Please enter both ID and password.');
+      return;
+    }
+    console.log('Login data:', data);
+    alert('Login successful!');
+  });
+</script>
+
+</body>
+</html>

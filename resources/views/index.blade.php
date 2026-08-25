@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sindh Police Finance Wing Portal</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+  :root{
+    --topbar: #3a4048;
+    --page-bg: #e4e6e9;
+    --card-bg: #f4f5f6;
+    --card-border: #d7dadd;
+    --label-color: #4a5568;
+    --accent: #3f7edb;
+    --placeholder: #a9b1bb;
+  }
+
+  * { box-sizing: border-box; }
+
+  body{
+    background: var(--page-bg);
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  /* Top bar - matches dashboard theme */
+  .topbar{
+    background: var(--topbar);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+  }
+  .topbar .brand{
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: .5px;
+    font-size: 1.05rem;
+  }
+  .topbar .brand i{ margin-right: 10px; color: var(--accent); }
+  .topbar .monogram{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    border: 2px solid var(--accent);
+    overflow: hidden;
+  }
+  .topbar .monogram img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .topbar .brand-wrap{
+    display: flex;
+    align-items: center;
+  }
+
+  /* Hero section */
+  .hero-outer{
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+
+  .hero-card{
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 56px 48px;
+    max-width: 620px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .badge-circle{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px auto;
+    border: 3px solid var(--accent);
+    overflow: hidden;
+  }
+  .badge-circle img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-card h6{
+    color: var(--placeholder);
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    font-size: .78rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .hero-card h1{
+    color: #2c3947;
+    font-weight: 700;
+    font-size: 1.9rem;
+    line-height: 1.35;
+    margin-bottom: 14px;
+  }
+
+  .hero-card p.subtitle{
+    color: var(--label-color);
+    font-size: .95rem;
+    margin-bottom: 36px;
+  }
+
+  .section-divider{
+    border: none;
+    border-top: 1px solid var(--card-border);
+    margin: 0 0 32px 0;
+  }
+
+  .btn-portal{
+    font-weight: 600;
+    letter-spacing: .5px;
+    padding: 12px 0;
+    border-radius: 4px;
+    font-size: .95rem;
+    width: 100%;
+  }
+
+  .btn-login-main{
+    background: var(--accent);
+    color: #fff;
+    border: none;
+  }
+  .btn-login-main:hover{
+    background: #326bc0;
+    color: #fff;
+  }
+
+  .btn-register-main{
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+  }
+  .btn-register-main:hover{
+    background: #eaf1fc;
+    color: var(--accent);
+  }
+
+  .footer-note{
+    margin-top: 28px;
+    font-size: .78rem;
+    color: var(--placeholder);
+  }
+
+  @media (max-width: 480px){
+    .hero-card{ padding: 40px 24px; }
+    .hero-card h1{ font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="brand-wrap">
+      <div class="monogram"><img src="{{asset('assets/images/SP-logo.jpg')}}" alt="Sindh Police"></div>
+      <span class="brand">Sindh Police Finance Wing Portal</span>
+    </div>
+  </div>
+
+  <div class="hero-outer">
+    <div class="hero-card">
+
+      <div class="badge-circle">
+        <img src="{{asset('assets/images/SP-logo.JPG')}}" alt="Sindh Police Logo">
+      </div>
+
+      <h6>Government of Sindh</h6>
+      <h1>Sindh Police<br>Finance Wing Portal</h1>
+      <p class="subtitle">Branch management and finance record system for Sindh Police</p>
+
+      <hr class="section-divider">
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <a href="{{route('login')}}" class="btn btn-login-main btn-portal">
+            <i class="fa-solid fa-right-to-bracket me-2"></i>LOGIN
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a href="{{route('register')}}" class="btn btn-register-main btn-portal">
+            <i class="fa-solid fa-user-plus me-2"></i>REGISTER
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        &copy; 2026 Sindh Police Finance Wing. All rights reserved.
+      </div>
+
+    </div>
+  </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
