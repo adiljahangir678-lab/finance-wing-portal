@@ -197,68 +197,70 @@
 
         <hr class="section-divider">
 
-        <form id="loginForm" novalidate>
+ <div class="card-wrap">
+  <div class="login-card">
 
-          <div class="field-row">
-            <label class="form-label" for="branchId">Branch Name</label>
-            <input type="text" class="form-control" id="branchId" name="branchId" placeholder="Enter branch Name" required>
-          </div>
-
-          <div class="field-row">
-            <label class="form-label" for="password">Password</label>
-            <div class="password-wrap">
-              <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
-              <i class="fa-regular fa-eye" id="togglePassword"></i>
-            </div>
-          </div>
-
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="rememberMe">
-              <label class="form-check-label" for="rememberMe">Remember me</label>
-            </div>
-            <a href="#" class="forgot-link">Forgot password?</a>
-          </div>
-
-          <button type="submit" class="btn btn-login">LOGIN</button>
-
-          <div class="register-link">
-            Don't have an account? <a href="register.html">Register here</a>
-          </div>
-
-        </form>
-
+    <!-- Display Laravel Backend Errors -->
+    @if ($errors->any())
+      <div class="alert alert-danger mb-4">
+        <ul class="mb-0">
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
+        </ul>
       </div>
-    </div>
+    @endif
+
+    <!-- Direct Laravel POST Form -->
+    <form action="{{ route('loginMatch') }}" method="POST">
+      @csrf
+
+      <div class="field-row">
+        <label class="form-label" for="branchName">Branch Name</label>
+        <input type="text" class="form-control" id="branchName" name="branch_name" value="{{ old('branch_name') }}" placeholder="Enter branch Name" required>
+      </div>
+
+      <div class="field-row">
+        <label class="form-label" for="password">Password</label>
+        <div class="password-wrap">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+          <i class="fa-regular fa-eye" id="togglePassword"></i>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="remember" id="rememberMe">
+          <label class="form-check-label" for="rememberMe">Remember me</label>
+        </div>
+        <a href="#" class="forgot-link">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn btn-login">LOGIN</button>
+
+      <div class="register-link">
+        Don't have an account? <a href="{{ route('register') }}">Register here</a>
+      </div>
+
+    </form>
+
   </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Toggle password visibility
+  // Sirf Password Show/Hide UI Toggle ke liye JS (Validation logic hata di hai)
   const toggle = document.getElementById('togglePassword');
   const passwordInput = document.getElementById('password');
-  toggle.addEventListener('click', () => {
-    const isPassword = passwordInput.type === 'password';
-    passwordInput.type = isPassword ? 'text' : 'password';
-    toggle.classList.toggle('fa-eye');
-    toggle.classList.toggle('fa-eye-slash');
-  });
 
-  // Basic submit handling (replace with real backend call)
-  document.getElementById('loginForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const data = {
-      id: document.getElementById('branchId').value.trim(),
-      password: passwordInput.value,
-      remember: document.getElementById('rememberMe').checked
-    };
-    if(!data.id || !data.password){
-      alert('Please enter both ID and password.');
-      return;
-    }
-    console.log('Login data:', data);
-    alert('Login successful!');
-  });
+  if (toggle && passwordInput) {
+    toggle.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      toggle.classList.toggle('fa-eye');
+      toggle.classList.toggle('fa-eye-slash');
+    });
+  }
 </script>
 
 </body>

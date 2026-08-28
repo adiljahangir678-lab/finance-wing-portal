@@ -28,7 +28,6 @@
     margin: 0;
   }
 
-  /* Top bar - matches dashboard theme */
   .topbar{
     background: var(--topbar);
     height: 64px;
@@ -44,7 +43,6 @@
   }
   .topbar .brand i{ margin-right: 10px; color: var(--accent); }
 
-  /* Page heading like "ADD CLIENTS" */
   .page-heading{
     max-width: 640px;
     margin: 32px auto 0 auto;
@@ -161,24 +159,34 @@
       <div class="section-title">BRANCH INFO</div>
       <hr class="section-divider">
 
-      <form id="registerForm" novalidate>
+      <!-- Display Laravel Validation Errors -->
+      @if ($errors->any())
+        <div class="alert alert-danger mb-4">
+          <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+
+      <!-- Direct Laravel POST Form -->
+      <form action="{{ route('registersave') }}" method="POST">
+        @csrf
 
         <div class="row field-row">
           <div class="col-md-6">
-            <label class="form-label" for="branchId">ID</label>
-            <input type="text" class="form-control" id="branchId" name="branchId" placeholder="Enter branch ID" required>
-          </div>
-          <div class="col-md-6">
             <label class="form-label" for="branchName">Branch Name</label>
-            <input type="text" class="form-control" id="branchName" name="branchName" placeholder="Enter branch name" required>
+            <input type="text" class="form-control" id="branchName" name="branch_name" value="{{ old('branch_name') }}" placeholder="Enter branch name" required>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label" for="inchargeName">Branch Incharge Name</label>
+            <input type="text" class="form-control" id="inchargeName" name="branch_incharge_name" value="{{ old('branch_incharge_name') }}" placeholder="Enter incharge's full name" required>
           </div>
         </div>
 
         <div class="row field-row">
-          <div class="col-md-6">
-            <label class="form-label" for="inchargeName">Branch Incharge Name</label>
-            <input type="text" class="form-control" id="inchargeName" name="inchargeName" placeholder="Enter incharge's full name" required>
-          </div>
           <div class="col-md-6">
             <label class="form-label" for="password">Password</label>
             <div class="password-wrap">
@@ -186,22 +194,19 @@
               <i class="fa-regular fa-eye" id="togglePassword"></i>
             </div>
           </div>
-        </div>
 
-        <div class="row field-row">
           <div class="col-md-6">
             <label class="form-label" for="confirmPassword">Confirm Password</label>
             <div class="password-wrap">
-              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password" required>
+              <input type="password" class="form-control" id="confirmPassword" name="password_confirmation" placeholder="Re-enter password" required>
               <i class="fa-regular fa-eye" id="toggleConfirmPassword"></i>
             </div>
-            <div class="invalid-feedback-text" id="passwordMismatch" style="display:none; color:#d9534f; font-size:.8rem; margin-top:6px;">Passwords do not match</div>
           </div>
         </div>
 
         <div class="d-flex justify-content-between align-items-center mt-4">
           <button type="submit" class="btn btn-register">REGISTER</button>
-          <span class="login-link">Already registered? <a href="#">Login here</a></span>
+          <span class="login-link">Already registered? <a href="{{ route('login') }}">Login here</a></span>
         </div>
 
       </form>
@@ -211,17 +216,16 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Toggle password visibility
-  const toggle = document.getElementById('togglePassword');
+  // Sirf Eye Icon Toggle karne ke liye chota sa JS (Form submission se iska koi lena dena nahi)
+  const togglePassword = document.getElementById('togglePassword');
   const passwordInput = document.getElementById('password');
-  toggle.addEventListener('click', () => {
+  togglePassword.addEventListener('click', () => {
     const isPassword = passwordInput.type === 'password';
     passwordInput.type = isPassword ? 'text' : 'password';
-    toggle.classList.toggle('fa-eye');
-    toggle.classList.toggle('fa-eye-slash');
+    togglePassword.classList.toggle('fa-eye');
+    togglePassword.classList.toggle('fa-eye-slash');
   });
 
-  // Toggle confirm password visibility
   const toggleConfirm = document.getElementById('toggleConfirmPassword');
   const confirmPasswordInput = document.getElementById('confirmPassword');
   toggleConfirm.addEventListener('click', () => {
@@ -230,38 +234,10 @@
     toggleConfirm.classList.toggle('fa-eye');
     toggleConfirm.classList.toggle('fa-eye-slash');
   });
-
-  // Basic submit handling (replace with real backend call)
-  document.getElementById('registerForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const mismatchMsg = document.getElementById('passwordMismatch');
-    const data = {
-      id: document.getElementById('branchId').value.trim(),
-      branchName: document.getElementById('branchName').value.trim(),
-      inchargeName: document.getElementById('inchargeName').value.trim(),
-      password: passwordInput.value,
-      confirmPassword: confirmPasswordInput.value
-    };
-
-    if(!data.id || !data.branchName || !data.inchargeName || !data.password || !data.confirmPassword){
-      mismatchMsg.style.display = 'none';
-      alert('Please fill in all fields.');
-      return;
-    }
-
-    if(data.password !== data.confirmPassword){
-      mismatchMsg.style.display = 'block';
-      confirmPasswordInput.classList.add('is-invalid');
-      return;
-    }
-
-    mismatchMsg.style.display = 'none';
-    confirmPasswordInput.classList.remove('is-invalid');
-    console.log('Register data:', data);
-    alert('Branch registered successfully!');
-    this.reset();
-  });
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
