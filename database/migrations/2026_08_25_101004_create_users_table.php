@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('branch_name');
             $table->string('branch_incharge_name');
             $table->string('password');
+            $table->string('role')->default('user'); // Admin ya User ke liye
             $table->rememberToken();
             $table->timestamps();
         });
