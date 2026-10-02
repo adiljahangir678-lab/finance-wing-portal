@@ -104,7 +104,15 @@
     <!-- Left Sidebar End -->
 
     <!-- Content Area -->
-    @yield('content')
+   <div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+
+            @yield('content')
+
+        </div>
+    </div>
+</div>
   
     {{-- <!-- Footer Start -->
     <footer class="footer">

@@ -75,109 +75,20 @@
   }
 </style>
 
+<!-- DAAK SECTION FOR ALL BRANCHES -->
 <div class="custom-sidebar-wrapper">
 
-  @canany(['isB1', 'isB2', 'isB3', 'isB4', 'isB5', 'isB6'])
-      
- 
-  <!-- BUDGET BRANCHES SECTION -->
-  <div class="menu-title text-uppercase small text-muted fw-bold px-3 my-2">Budget Branches</div>
+  {{-- Admin & All Branch Users will see Daily Daak button --}}
+  @canany(['isAdmin', 'isB1', 'isB2', 'isB3', 'isB4', 'isB5', 'isB6', 'isA1', 'isA2', 'isA3'])
+    <div class="menu-title text-uppercase small text-muted fw-bold px-3 my-2">Daak Management</div>
 
-  @can('isB1')
-  <a href="{{route('budget1.dashboard')}}" class="sidebar-btn">
-    <div class="btn-content">
-      <i class="fa-solid fa-wallet btn-icon text-primary"></i>
-      <span>Budget Branch-I</span>
-    </div>
-    <i class="fa-solid fa-chevron-right arrow-icon"></i>
-  </a> 
-  @endcan
+    <a href="{{ route('daak.index') }}" class="sidebar-btn">
+      <div class="btn-content">
+        <i class="fa-solid fa-wallet btn-icon text-primary"></i>
+        <span>Add Daak</span>
+      </div>
+      <i class="fa-solid fa-chevron-right arrow-icon"></i>
+    </a>
+  @endcanany
 
-  @can('isB2')
-  <a href="#" class="sidebar-btn">
-    <div class="btn-content">
-      <i class="fa-solid fa-wallet btn-icon text-primary"></i>
-      <span>Budget Branch-II</span>
-    </div>
-    <i class="fa-solid fa-chevron-right arrow-icon"></i>
-  </a>
-  @endcan
-
-  @can('isB3')
-  <a href="#" class="sidebar-btn">
-    <div class="btn-content">
-      <i class="fa-solid fa-wallet btn-icon text-primary"></i>
-      <span>Budget Branch-III</span>
-    </div>
-    <i class="fa-solid fa-chevron-right arrow-icon"></i>
-  </a>
-  @endcan
-
-  @can('isB4')
-  <a href="#" class="sidebar-btn">
-    <div class="btn-content">
-      <i class="fa-solid fa-wallet btn-icon text-primary"></i>
-      <span>Budget Branch-IV</span>
-    </div>
-    <i class="fa-solid fa-chevron-right arrow-icon"></i>
-  </a>
-  @endcan
-
-  @can('isB5')
-  <a href="#" class="sidebar-btn">
-    <div class="btn-content">
-      <i class="fa-solid fa-wallet btn-icon text-primary"></i>
-      <span>Budget Branch-V</span>
-    </div>
-    <i class="fa-solid fa-chevron-right arrow-icon"></i>
-  </a>
-  @endcan
-
-
-  @can('isB6')
-  <a href="#" class="sidebar-btn">
-    <div class="btn-content">
-      <i class="fa-solid fa-wallet btn-icon text-primary"></i>
-      <span>Budget Branch-VI</span>
-    </div>
-    <i class="fa-solid fa-chevron-right arrow-icon"></i>
-  </a>
-  @endcan
-
-@endcanany <!-- end budget section... -->
-
-@canany(['isA1', 'isA2', 'isA3'])
-  <!-- AUDIT BRANCHES SECTION -->
-  <div class="menu-title">AUDIT BRANCHES</div>
-
-  @can('isA1')
-  <a href="#" class="sidebar-btn">
-    <div class="btn-content">
-      <i class="fa-solid fa-file-invoice-dollar btn-icon text-success"></i>
-      <span>Audit Branch-I</span>
-    </div>
-    <i class="fa-solid fa-chevron-right arrow-icon"></i>
-  </a>
-  @endcan
-
-  @can('isA2')
-  <a href="#" class="sidebar-btn">
-    <div class="btn-content">
-      <i class="fa-solid fa-file-invoice-dollar btn-icon text-success"></i>
-      <span>Audit Branch-II</span>
-    </div>
-    <i class="fa-solid fa-chevron-right arrow-icon"></i>
-  </a>
-  @endcan
-
-  @can('isA3')
-  <a href="#" class="sidebar-btn">
-    <div class="btn-content">
-      <i class="fa-solid fa-file-invoice-dollar btn-icon text-success"></i>
-      <span>Audit Branch-III</span>
-    </div>
-    <i class="fa-solid fa-chevron-right arrow-icon"></i>
-  </a>
-  @endcan
-@endcanany
 </div>
